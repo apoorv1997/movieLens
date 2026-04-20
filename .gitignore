@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+.ipynb_checkpoints/
+.DS_Store
+
+# data and outputs live outside the repo but guard anyway
+data/
+reports/
+*.pt
+*.pkl
