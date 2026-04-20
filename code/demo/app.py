@@ -7,13 +7,17 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+# Streamlit's runtime loads stdlib `code` before app.py runs, shadowing our
+# `code/` package. Drop the cached stdlib module and point Python at the repo
+# before importing anything from our package.
+sys.modules.pop("code", None)
+_REPO = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(_REPO))
+
 import numpy as np
 import pandas as pd
 import streamlit as st
 import torch
-
-_REPO = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(_REPO.parent))
 
 from code.config import CFG
 from code.data import load_and_split, load_movies
